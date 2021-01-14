@@ -21,3 +21,19 @@ https://www.cnblogs.com/letfly/p/13811457.html
 重新配置项目下andriod/build.gradle
 
 https://www.cnblogs.com/022414ls/p/13469136.html
+
+### row组件不设置textDirection，报错
+
+Horizontal RenderFlex with MainAxisAlignment.start has a null textDirection, so the alignment cannot be resolved.
+
+row源码里记载了，大概意思就是当row没有children或者只有一个，或者mainAxisAlignment属性设置为start或者end，默认为start，这两种情况时，需要设置文字方向
+
+```js
+
+/// The [textDirection] argument defaults to the ambient [Directionality], if
+  /// any. If there is no ambient directionality, and a text direction is going
+  /// to be necessary to determine the layout order (which is always the case
+  /// unless the row has no children or only one child) or to disambiguate
+  /// `start` or `end` values for the [mainAxisAlignment], the [textDirection]
+  /// must not be null.
+```

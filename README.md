@@ -37,3 +37,29 @@ row源码里记载了，大概意思就是当row没有children或者只有一个
   /// `start` or `end` values for the [mainAxisAlignment], the [textDirection]
   /// must not be null.
 ```
+
+### No direction widget found
+
+flutter布局有个概念，是文字方向，有的组件构造函数里可以设置textDirection,有的不行，如果要全局统一设置，其中一个办法是最外层使用 Directionality 
+
+```js
+  Widget build(BuildContext context) {
+    //Directionality 最上层设置文字方向
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Container(
+        margin:EdgeInsets.fromLTRB(0, 25, 0, 0),
+        decoration: BoxDecoration(color: Color.fromRGBO(138,197,241,1)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            header,
+            body,
+            footer
+          ],
+        ),
+      ),
+    );
+  }
+  
+```

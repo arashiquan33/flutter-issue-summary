@@ -67,3 +67,134 @@ flutter布局有个概念，是文字方向，有的组件构造函数里可以�
   }
 
 ```
+
+
+### SafeArea 安全区
+
+安全区指的是应用可以安全使用的区域，使用non materialApp 并且不使用SafeArea,页面会顶到手机可视区域的最上面，如下图：
+
+
+``` dart
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //从根节点就指定文字方向，这样,子的widget基本不需要再设置textDirection
+
+    return Directionality(
+        textDirection: TextDirection.ltr,
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.black
+          ),
+          //上中下三栏布局
+          child: Column(
+            //设置column 纵向轴,使得布局呈现上中下3栏
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //设置子widget
+            children: [
+              Header(),
+              //使用Flexible包装body,使得body占据剩余空间
+              Flexible(
+                child: Body(),
+                flex: 1,
+              ),
+              Footer()
+            ],
+          ),
+        );
+     );
+  }
+}
+
+```
+
+
+
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0118/151801_1639b0af_7920391.png "1610953773(1).png")
+
+
+使用SafaArea组件，来让页面处于安全区域中显示
+
+
+
+``` dart
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //从根节点就指定文字方向，这样,子的widget基本不需要再设置textDirection
+    //创建MediaQuery data，因为使用SafeArea组件时，必须先在上下文中创建MediaQuery组件
+    final mediaQueryData = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+    return Directionality(
+        textDirection: TextDirection.ltr,
+        child: MediaQuery(
+          data:mediaQueryData,
+          child: MyAppSafeArea(),
+        ));
+  }
+}
+
+class MyAppSafeArea extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //SafeArea 组件可以让页面处于安全区，所谓安全区指的是应该的初始左上的位置位于手机本身的statusBar下面(statusBar一般包含了电量、wife等图标)
+    return  SafeArea(
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.black
+        ),
+        //上中下三栏布局
+        child: Column(
+          //设置column 纵向轴,使得布局呈现上中下3栏
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //设置子widget
+          children: [
+            Header(),
+            //使用Flexible包装body,使得body占据剩余空间
+            Flexible(
+              child: Body(),
+              flex: 1,
+            ),
+            Footer()
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+```
+
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0118/152347_778b7012_7920391.png "1610954610(1).png")
+
+
+## Row或者Column包含的children超出区域，报错overflow溢出
+
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0118/165502_485832de_7920391.png "屏幕截图.png")
+
+这种情况，需要用Expanded组件包裹children里的组件
+
+``` js
+
+class FooterItem extends StatelessWidget {
+  final String displayName;
+  final IconData iconData;
+  static const color=Colors.white;
+  FooterItem(this.displayName,this.iconData);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(iconData,color: color,),
+        Text(displayName,style: TextStyle(color: color),)
+      //  Expanded(child: Icon(iconData,color: color,)),
+     //   Expanded(child: Text(displayName,style: TextStyle(color: color),))
+      ],
+    );
+  }
+}
+
+```
+
+

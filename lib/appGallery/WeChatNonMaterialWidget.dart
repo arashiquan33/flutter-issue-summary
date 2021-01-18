@@ -123,7 +123,7 @@ class BodyListItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,//横轴拉伸铺满
                         children: [
                           Text('EBR西安开发组',style: TextStyle(fontSize: 14,color: Colors.black,fontWeight: FontWeight.bold),),
-                          Text('EBR西安开发组',style: TextStyle(fontSize: 12,color: Colors.black54),)
+                          Text('EBR西安开发1组',style: TextStyle(fontSize: 12,color: Colors.black54),)
                         ],
                   )),
                   Column(
@@ -206,7 +206,4 @@ class MyApp extends StatelessWidget {
       Footer()
     );
   }
-}
-void main(){
-  runApp(MyApp());
 }

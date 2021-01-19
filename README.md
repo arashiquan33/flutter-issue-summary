@@ -12,19 +12,24 @@ flutter常见问题汇总
 
 ### running gradle tash assembleDebug 报错，下载gradle失败
 
-https://www.freesion.com/article/58001056925/
+1.首先先搞清楚，flutter是用gradle编译的，因此你机器上必须先有gradle，当你使用andriod studio创建flutter项目后，会自动在C盘下创建.gradle目录，我的如下:
 
-https://www.cnblogs.com/phen/p/13427912.html
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/140839_c1daa4b6_7920391.png "屏幕截图.png")
 
-https://www.cnblogs.com/letfly/p/13811457.html
+此时这里面是空的或者你执行过一次后会有类似gradle-xxx.zip.执行失败的原因很多，一般是因为墙的关系，打开项目目录下android>gradle>wrapper>gradle-wrapper.properties
 
-最后无奈，在线下载gradle,使用第三个链接地址给出的方案
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/141246_78c4ef2f_7920391.png "屏幕截图.png")
 
-### run 报错，Could not resolve all artifacts for configuration ':classpath'.    > Could not find com.android.tool，从maven.aliyun下载失败
+2.上面这部分是解决gradle的问题，然后一般还需要解决下载gradle依赖的其他工具包问题，还是上面那个目录，找到build.gradle，把google().jcenert()注销，使用国内代理
 
-重新配置项目下andriod/build.gradle
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/141603_39ac3509_7920391.png "屏幕截图.png")
 
-https://www.cnblogs.com/022414ls/p/13469136.html
+
+3.这样在run一般就可以了，如果还是报错，比如Could not resolve com.android.tools.build:gradle:4.1.0. 有可能是代理的问题，检查项目下的gradle.properties中是否设置了代理或者系统的gradle配置中(系统的gradle配置位于C盘用户.gradle目录下)
+
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0119/141853_0996ba2c_7920391.png "屏幕截图.png")
+
+
 
 ### row组件不设置textDirection，报错
 

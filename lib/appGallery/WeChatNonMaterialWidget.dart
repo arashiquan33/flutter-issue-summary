@@ -65,6 +65,13 @@ class Header extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
+              child:GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Icon(Icons.keyboard_arrow_left,color: Colors.white,))
+            ),
+            Container(
               margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
               child: Text(
                   '微信',
@@ -196,7 +203,7 @@ class WeChatIndex extends StatelessWidget {
 
 
 
-class MyApp extends StatelessWidget {
+class MyWebChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
